@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>10s Mic + Speaker Looper</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #212121;
+      color: white;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 32px auto;
+      padding: 0 12px;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      margin: 24px 0 16px 0;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    button,
+    select {
+      font-size: 1em;
+      padding: 6px 12px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    button:disabled,
+    select:disabled {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .status {
+      margin: 8px 0;
+      padding: 6px 8px;
+      font-size: 0.95em;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+    }
+
+    .status.connected {
+      background-color: rgba(65, 152, 35, 0.484);
+    }
+
+    .status.disconnected {
+      background-color: rgba(94, 19, 19, 0.445);
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .results {
+      margin: 12px 0 24px 0;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      min-height: 140px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-family: monospace;
+      font-size: 1em;
+      white-space: pre-wrap;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>10s Mic + Speaker Looper</h1>
+    <div class="controls">
+      <button id="startBtn" type="button">Record 10s + Loop Playback</button>
+      <button id="stopBtn" type="button" disabled>Stop Loop</button>
+      <select id="micSelect"></select>
+    </div>
+    <div class="status-row">
+      <div id="captureStatus" class="status disconnected">Capture: Idle</div>
+      <div id="playbackStatus" class="status disconnected">Playback: Stopped</div>
+    </div>
+    <pre class="results" id="logOutput">Ready. Click "Record 10s + Loop Playback" to begin.
+</pre>
+    <audio id="loopPlayer" controls style="width: 100%;"></audio>
+  </div>
+  <script src="./renderer.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, desktopCapturer, ipcMain, session, systemPreferences } = require('electron');
+const { app, BrowserWindow, desktopCapturer, ipcMain, session } = require('electron');
 const path = require('node:path');
 
 function createWindow() {
@@ -7,8 +7,7 @@ function createWindow() {
     height: 600,
     title: '10s Mic + Speaker Looper',
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      webSecurity: false
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
@@ -22,22 +21,6 @@ app.whenReady().then(() => {
     } else {
       console.log(`[renderer] ${message}`);
     }
-  });
-
-  ipcMain.handle('permissions-status', () => {
-    const statuses = {
-      isPackaged: app.isPackaged,
-      appName: app.getName()
-    };
-    for (const mediaType of ['microphone', 'screen']) {
-      try {
-        statuses[mediaType] = systemPreferences.getMediaAccessStatus(mediaType);
-      } catch (error) {
-        statuses[mediaType] = `error: ${error.message}`;
-      }
-    }
-    console.log('[main] Permission status check:', statuses);
-    return statuses;
   });
 
   session.defaultSession.setDisplayMediaRequestHandler(async (request, callback) => {

@@ -5,7 +5,7 @@ Minimal Electron app that records a 10-second clip and loops playback.
 ## What It Captures
 
 - Microphone audio
-- System audio (when available)
+- System audio
 
 ## Requirements
 

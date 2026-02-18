@@ -110,21 +110,11 @@ async function buildMixedStream() {
     log(`Microphone stream id=${microphoneStream.id}, audioTracks=${microphoneStream.getAudioTracks().length}`);
     logTrackDetails('Mic track', microphoneStream.getAudioTracks()[0]);
 
-    let displayStream;
-    try {
-        displayStream = await navigator.mediaDevices.getDisplayMedia({
-            audio: true,
-            video: false
-        });
-        log('Display capture mode: audio-only (video=false).');
-    } catch (error) {
-        log(`Audio-only display capture failed (${error.message}). Falling back to video=true.`);
-        displayStream = await navigator.mediaDevices.getDisplayMedia({
-            audio: true,
-            video: true
-        });
-        log('Display capture mode: audio+video fallback (video=true).');
-    }
+    const displayStream = await navigator.mediaDevices.getDisplayMedia({
+        audio: true,
+        video: false
+    });
+    log('Display capture mode: audio-only (video=false).');
     displayStreamForSession = displayStream;
     log(`Display stream id=${displayStream.id}, videoTracks=${displayStream.getVideoTracks().length}, audioTracks=${displayStream.getAudioTracks().length}`);
     logTrackDetails('Display audio track', displayStream.getAudioTracks()[0]);

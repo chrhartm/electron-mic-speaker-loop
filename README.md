@@ -2,6 +2,9 @@
 
 Minimal Electron app that records a 10-second clip and loops playback.
 
+Based on [alectrocute/mic-speaker-streamer](https://github.com/alectrocute/mic-speaker-streamer).
+For Electron 39+, native loopback capture support made `electron-audio-loopback` unnecessary in this app.
+
 ## What It Captures
 
 - Microphone audio
